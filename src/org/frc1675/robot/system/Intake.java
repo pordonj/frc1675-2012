@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 import org.frc1675.driver.XBoxController;
 
 /**
- *
+ * Intake
  * @author team1675
  */
 public class Intake {
