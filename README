@@ -1,3 +1,5 @@
 Welcome to FRC1675's (The Ultimate Protection Squad, or UPS) 2012 codebase. 
 
 Right now it is pretty ugly and in need to documentation, cleaning, and reorganization. Such is the nature of build/competition, no?
+
+I've committed the entirety of the netbeans project (except the build folder) since I thought it would be more hassle to make a new FRC Java project and inject the source than to just check out the entire thing.
