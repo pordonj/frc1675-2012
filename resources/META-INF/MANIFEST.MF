@@ -1,0 +1,6 @@
+MIDlet-Name: UPS2012
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: FIRST
+MIDlet-1: UPS2012Robot, , org.frc1675.ups2012.UPS2012Robot
+MicroEdition-Profile: IMP-1.0
+MicroEdition-Configuration: CLDC-1.1

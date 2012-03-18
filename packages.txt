@@ -1,0 +1,9 @@
+PACKAGES:
+
+org
+    frc1675 - contains all code by FRC 1675
+        driver - classes corresponding to things NOT on the robot. Controllers, button boxes, etc.
+        robot - classes corresponding to things ON the robot.
+            component - classes corresponding to "parts" that are used by systems for convenience. ex: the TwoMotorGearbox class
+            system - classes corresponding to functional systems on a robot. TankDrive, Elevator, etc
+        ups2012 - classes specifically targeted at the 2012 season's robot
