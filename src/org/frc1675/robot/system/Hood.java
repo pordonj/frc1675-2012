@@ -6,7 +6,7 @@
 package org.frc1675.robot.system;
 
 /**
- *
+ * Represents expected behavior for the shooter's hood.
  * @author team1675
  */
 public interface Hood {
