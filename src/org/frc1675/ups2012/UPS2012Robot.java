@@ -221,19 +221,7 @@ public class UPS2012Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        
-//        while(!hoodReady){
-//            hoodReady = hood.setAngle(-30);
-//        }
-        
-//        autonScript.doAutonomous();
-//        if(reportTimer.get() > 1.0){
-//            ticksPastSecond = shooterCounter.get();
-//            shooterCounter.reset();
-//            reportTimer.reset();
-//        }
-//        int rpm = (int) (ticksPastSecond / 6L);
-//        SmartDashboard.putInt("Shooter RPM", rpm);
+        autonScript.doAutonomous();
     }
 
     public void teleopInit(){
