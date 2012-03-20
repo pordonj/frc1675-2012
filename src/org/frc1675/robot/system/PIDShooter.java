@@ -25,21 +25,29 @@ public class PIDShooter implements Shooter {
     private static final double PID_MAX_IN = 5000.0;
     
     private static final double PID_TOLERANCE_PCT = 2.0; //1.0 = 1%
-    
-    private static final double P = 0.0020;
-    private static final double I = 0.00015;
-    private static final double D = 0.0001;
+
+    //p = .001
+    //i = .00025
+
+    //p = .0005
+    //i = .0001
+
+    private static final double P = 0.0005;
+    private static final double I = 0.0001;
+    private static final double D = 0.00;
     
     private SendablePIDController pid;
     private SourceCounter counterSource;
     private Timer errorResetTimer;
+    private RampingShooterPIDOutput pidOutput;
     
     public PIDShooter(SpeedController shooterMotor, Counter counter){
         this.counterSource = new SourceCounter(counter);
         this.counterSource.start();
         errorResetTimer = new Timer();
         errorResetTimer.start();
-        pid = new SendablePIDController(P, I, D, counterSource, shooterMotor);
+        pidOutput = new RampingShooterPIDOutput(shooterMotor);
+        pid = new SendablePIDController(P, I, D, counterSource, shooterMotor, 0.05);
         pid.setOutputRange(PID_MIN_OUT, PID_MAX_OUT);
         pid.setInputRange(PID_MIN_IN, PID_MAX_IN);
         pid.setTolerance(PID_TOLERANCE_PCT);
@@ -53,18 +61,18 @@ public class PIDShooter implements Shooter {
     }
 
     public boolean setSpeed(double speed) {
-        if(errorResetTimer.get() > 5.0){
-            errorResetTimer.reset();
-            pid.reset();
-            pid.enable();
-        }
+//        if(errorResetTimer.get() > 5.0){
+//            errorResetTimer.reset();
+//            pid.reset();
+//            pid.enable();
+//        }
         SmartDashboard.putDouble("Counter PID Get", fix2(counterSource.pidGet()));
         SmartDashboard.putData("Shooter send pid", pid);
         pid.setSetpoint(speed);
         SmartDashboard.putDouble("Shooter PID", fix2(pid.get()));
         boolean onTarget = pid.onTarget();
         SmartDashboard.putBoolean("On Target Speed", onTarget);
-        SmartDashboard.putDouble("Shooter Error", pid.getError());
+        SmartDashboard.putDouble("Shooter Error", fix2(pid.getError()));
         return onTarget;
     }
 

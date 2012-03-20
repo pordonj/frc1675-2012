@@ -47,6 +47,9 @@ public class SourceCounter implements PIDSource {
                 if(lastRPMReport > 5000.0){
                     lastRPMReport = lastLastRPMReport;
                 }
+                if(lastLastRPMReport > 2000.0 && lastRPMReport - lastLastRPMReport > 1000.0){
+                                        lastRPMReport = lastLastRPMReport;
+                }
             }
             SmartDashboard.putInt("Shooter RPM", (int)lastRPMReport);
             return lastRPMReport;
