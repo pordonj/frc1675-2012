@@ -52,6 +52,7 @@ public class PresetFinderShooterSystem {
     
     private void handleStepping() {
         if(stepAvailable){
+           
             if(controller.getLeftBumperButton()){
                 addStep();
             } else if(controller.getRightBumperButton()){
@@ -60,7 +61,7 @@ public class PresetFinderShooterSystem {
         } else {
             checkCooldown();
         }
-//        SmartDashboard.putInt("Stepping Angle", currentAngle);
+        SmartDashboard.putInt("Stepping Angle", currentAngle);
     }
 
     private void addStep() {

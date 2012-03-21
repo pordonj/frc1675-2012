@@ -15,10 +15,10 @@ import org.frc1675.driver.XBoxController;
  * @author Lil' Sis
  */
 public class EncoderHood implements Hood{
-    private static final double UP_SPEED_LOW = -0.5;
-    private static final double UP_SPEED_HIGH = -0.4;
-    private static final double DOWN_SPEED_LOW = 0.33;
-    private static final double DOWN_SPEED_HIGH = 0.25;
+    private static final double UP_SPEED_LOW = -0.6;
+    private static final double UP_SPEED_HIGH = -0.5;
+    private static final double DOWN_SPEED_LOW = 0.5;
+    private static final double DOWN_SPEED_HIGH = 0.4;
 
     private SpeedController hoodMotor;
     private XBoxController controller;

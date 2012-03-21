@@ -32,6 +32,9 @@ public class SteppingShooter implements Shooter{
         timer = new Timer();
         stepAvailable = true;
     }
+
+    public SteppingShooter(SpeedController shooterMotor) {
+    }
     
     public boolean doShooter(){
         handleStepping();

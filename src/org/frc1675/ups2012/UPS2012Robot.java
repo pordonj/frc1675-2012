@@ -72,8 +72,8 @@ public class UPS2012Robot extends IterativeRobot {
     Storage ballStorage;
     SimpleTankDrive drive;
 //    ShooterSystem shooterSystem;
-//    PresetFinderShooterSystem shooterSystem;
-    RotatingPresetShooterSystem shooterSystem;
+    PresetFinderShooterSystem shooterSystem;
+//    RotatingPresetShooterSystem shooterSystem;
     BridgeArm bridgeArm;
 
     //VISION SYSTEM
@@ -166,9 +166,9 @@ public class UPS2012Robot extends IterativeRobot {
         
         
         //- PID PRESET FINDING
-//        Shooter shooter = new SteppingShooter(shooterMotor);
-//        hood = new EncoderHood(hoodMotor, operatorController, hoodEncoder, hoodLimit);
-//        shooterSystem = new PresetFinderShooterSystem(shooter, hood, turret, driverController);
+        Shooter shooter = new PIDSteppingShooter(shooterMotor, shooterCounter, driverController);
+        hood = new EncoderHood(hoodMotor, operatorController, hoodEncoder, hoodLimit);
+        shooterSystem = new PresetFinderShooterSystem(shooter, hood, turret, operatorController);
         
         //- VOLTAGE PRESET SHOOTING / ENCODER HOOD
 //        Shooter shooter = new VoltageShooter(shooterMotor);
@@ -176,9 +176,9 @@ public class UPS2012Robot extends IterativeRobot {
 //        shooterSystem = new RotatingPresetShooterSystem(shooter, hood, turret, operatorController);
         
         //- PID PRESET SHOOTING / ENCODER HOOD
-        Shooter shooter = new PIDShooter(shooterMotor, shooterCounter);  
-        hood = new EncoderHood(hoodMotor, operatorController, hoodEncoder, hoodLimit);
-        shooterSystem = new RotatingPresetShooterSystem(shooter, hood, turret, operatorController);
+//        Shooter shooter = new PIDShooter(shooterMotor, shooterCounter);  
+//        hood = new EncoderHood(hoodMotor, operatorController, hoodEncoder, hoodLimit);
+//        shooterSystem = new RotatingPresetShooterSystem(shooter, hood, turret, operatorController);
         
         //- PID PRESET SHOOTING / PID HOOD
 //        Shooter shooter = new PIDShooter(shooterMotor, shooterCounter);  
@@ -205,7 +205,7 @@ public class UPS2012Robot extends IterativeRobot {
         bridgeArm = new SimpleBridgeArm(bridgeArmRelay, operatorController, armInLimit, armOutLimit);
         
         //AUTONOMOUS
-        autonScript = new BabbysFirstAutonomous(shooterSystem, ballStorage);
+//        autonScript = new BabbysFirstAutonomous(shooterSystem, ballStorage);
         //autonScript = new FeedingScript(ballStorage, 6.0);
         
         
@@ -221,7 +221,7 @@ public class UPS2012Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        autonScript.doAutonomous();
+//        autonScript.doAutonomous();
     }
 
     public void teleopInit(){

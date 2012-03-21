@@ -16,7 +16,7 @@ import org.frc1675.robot.component.SourceCounter;
  * Used for help in finding presets.
  * @author Josh
  */
-public class PIDSteppingShooter {
+public class PIDSteppingShooter implements Shooter {
     private static final double PID_MIN_OUT = 0.0;
     private static final double PID_MAX_OUT = 1.0;
     private static final double PID_MIN_IN = 0.0;
@@ -42,28 +42,25 @@ public class PIDSteppingShooter {
         this.counterSource.start();
         errorResetTimer = new Timer();
         errorResetTimer.start();
+        timer = new Timer();
+        timer.start();
         pid = new SendablePIDController(P, I, D, counterSource, shooterMotor);
         pid.setOutputRange(PID_MIN_OUT, PID_MAX_OUT);
         pid.setInputRange(PID_MIN_IN, PID_MAX_IN);
         pid.setTolerance(PID_TOLERANCE_PCT);
-
+        this.controller = controller;
         pid.enable();
         SmartDashboard.putData("Shooter send pid", pid);
     }
     
     public boolean doShooter() {
-       if(errorResetTimer.get() > 5.0){
-            errorResetTimer.reset();
-            pid.reset();
-            pid.enable();
-        }
         SmartDashboard.putDouble("Counter PID Get", fix2(counterSource.pidGet()));
         SmartDashboard.putData("Shooter send pid", pid);
-        pid.setSetpoint(handleStepping());
-        SmartDashboard.putDouble("Shooter PID", fix2(pid.get()));
+        double speed = handleStepping();
+        pid.setSetpoint(speed);
+        SmartDashboard.putInt("Step", currentStep);
         boolean onTarget = pid.onTarget();
         SmartDashboard.putBoolean("On Target Speed", onTarget);
-        SmartDashboard.putDouble("Shooter Error", pid.getError());
         return onTarget;
     }
 
@@ -90,6 +87,7 @@ public class PIDSteppingShooter {
 
     private double handleStepping() {
         if(stepAvailable){
+             System.out.println("Step Available");
             if(controller.getLeftBumperButton()){
                 addStep();
             } else if(controller.getRightBumperButton()){
@@ -102,14 +100,14 @@ public class PIDSteppingShooter {
         double rpmFromStepping = 100.0 * (double)currentStep;
         
         if(rpmFromStepping != 0){
-            rpmFromStepping += 2400;
+            rpmFromStepping += 2400.0;
         }
         
        return (rpmFromStepping);
     }
     
     private void addStep() {
-        if(currentStep < 20){
+        if(currentStep < 25){
             currentStep++;
             startCooldown();
         }
